@@ -23,6 +23,26 @@ async def suma(ctx,num1:int,num2:int):
     suma=num1+num2 
     await ctx.send(f"la suma de {num1} + {num2} = {suma}")
 
+@Aca.command()
+async def meme(ctx):
+    Carp = 'Bot1/images'
+    Imgs = os.listdir(Carp)
+    Img_Random = random.choice(Imgs)
+    ruta = os.path.join(Carp, Img_Random)
 
+    with open(ruta, 'rb') as f:
+        picture = discord.File(f)
+    await ctx.send(file=picture)
+
+@Aca.command()
+async def memanimales(ctx):
+    Carp = 'Bot1/images/animales'
+    Imgs = os.listdir(Carp)
+    Img_Random = random.choice(Imgs)
+    ruta = os.path.join(Carp, Img_Random)
+
+    with open(ruta, 'rb') as f:
+        picture = discord.File(f)
+    await ctx.send(file=picture)
 
 Aca.run("TOKEN ACA =)")
