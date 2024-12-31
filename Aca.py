@@ -20,7 +20,7 @@ async def hola(ctx):
 
 
 @bot.command()
-async def contrasena(ctx, longitud: int = 12):
+async def contra(ctx, longitud: int = 12):
     if longitud < 6:
         await ctx.send("La longitud mínima de la contraseña debe ser 6 caracteres.")
         return
@@ -46,7 +46,7 @@ async def contrasena(ctx, longitud: int = 12):
         await ctx.send("No respondiste a tiempo. Por favor, intenta de nuevo.")
 
 @bot.command()
-async def ver_contrasenas(ctx):
+async def ver_contra(ctx):
     if os.path.exists(PASSWORD_FILE):
         with open(PASSWORD_FILE, "r") as file:
             contenido = file.read()
@@ -58,7 +58,7 @@ async def ver_contrasenas(ctx):
         await ctx.send("Aún no se ha guardado ninguna contraseña.")
 
 @bot.command()
-async def borrar_contrasenas(ctx):
+async def borrar_contra(ctx):
     if os.path.exists(PASSWORD_FILE):
         os.remove(PASSWORD_FILE)
         await ctx.send("¡Todas las contraseñas han sido borradas!")
@@ -70,9 +70,9 @@ async def ayuda(ctx):
     comandos = """
     **Lista de comandos disponibles:**
     °hola - Saluda al bot.
-    °contrasena <longitud> - Genera una contraseña segura y pregunta para qué servicio es, luego la guarda.
-    °ver_contrasenas - Muestra todas las contraseñas guardadas.
-    °borrar_contrasenas - Borra todas las contraseñas guardadas.
+    °contra <longitud> - Genera una contraseña segura y pregunta para qué servicio es, luego la guarda.
+    °ver_contras - Muestra todas las contraseñas guardadas.
+    °borrar_contras - Borra todas las contraseñas guardadas.
     """
     await ctx.send(comandos)
 
