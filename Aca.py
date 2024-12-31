@@ -18,6 +18,66 @@ async def on_ready():
 async def hola(ctx):
     await ctx.send("Hola, ¿cómo estás?")
 
+@bot.command()
+async def bien(ctx):
+    await ctx.send("¡Qué bacano! ¿Qué deseas hacer?")
+
+@bot.command()
+async def suma(ctx, num1: int, num2: int):
+    resultado = num1 + num2
+    await ctx.send(f"La suma de {num1} + {num2} = {resultado}")
+
+@bot.command()
+async def emojii(ctx):
+    emojis = ["😀", "😂", "🥳", "😎", "😍", "😢", "😡"]
+    random_emoji = random.choice(emojis)
+    await ctx.send(random_emoji)
+
+@bot.command()
+async def meme(ctx):
+    carpeta = 'Bot1/images'
+    if os.path.exists(carpeta):
+        imagenes = os.listdir(carpeta)
+        if imagenes:
+            img_random = random.choice(imagenes)
+            ruta = os.path.join(carpeta, img_random)
+            try:
+                with open(ruta, 'rb') as f:
+                    picture = discord.File(f)
+                await ctx.send(file=picture)
+            except Exception as e:
+                await ctx.send("Ocurrió un error al cargar el meme.")
+        else:
+            await ctx.send("No hay imágenes en la carpeta de memes.")
+    else:
+        await ctx.send("La carpeta de memes no existe.")
+
+@bot.command()
+async def memanimales(ctx):
+    carpeta = 'Bot1/images/animales'
+    if os.path.exists(carpeta):
+        imagenes = os.listdir(carpeta)
+        if imagenes:
+            img_random = random.choice(imagenes)
+            ruta = os.path.join(carpeta, img_random)
+            try:
+                with open(ruta, 'rb') as f:
+                    picture = discord.File(f)
+                await ctx.send(file=picture)
+            except Exception as e:
+                await ctx.send("Ocurrió un error al cargar el meme.")
+        else:
+            await ctx.send("No hay imágenes en la carpeta de memes de animales.")
+    else:
+        await ctx.send("La carpeta de memes de animales no existe.")
+
+@bot.command()
+async def elegir(ctx, *opciones):
+    if opciones:
+        eleccion = random.choice(opciones)
+        await ctx.send(f"He elegido: {eleccion}")
+    else:
+        await ctx.send("Por favor, proporciona opciones para elegir.")
 
 @bot.command()
 async def contra(ctx, longitud: int = 12):
@@ -69,6 +129,13 @@ async def borrar_contra(ctx):
 async def ayuda(ctx):
     comandos = """
     **Lista de comandos disponibles:**
+    °hola - Saluda al bot.
+    °bien - Responde a 'bien'.
+    °suma <num1> <num2> - Suma dos números.
+    °emojii - Envía un emoji al azar.
+    °meme - Envía un meme al azar.
+    °memanimales - Envía un meme de animales al azar.
+    °elegir <opción1> <opción2> ... - Elige una opción al azar.
     °hola - Saluda al bot.
     °contra <longitud> - Genera una contraseña segura y pregunta para qué servicio es, luego la guarda.
     °ver_contras - Muestra todas las contraseñas guardadas.
